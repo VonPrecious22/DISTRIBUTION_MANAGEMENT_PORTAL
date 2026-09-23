@@ -1,5 +1,5 @@
 const bcrypt = require("bcryptjs");
-const loginValidator = require("../middleware/validate");
+const { loginValidator } = require("../validate/userValidator");
 const User = require("../models/user");
 
 const loginForm = (req, res) => {
@@ -9,12 +9,12 @@ const loginForm = (req, res) => {
 const login = async (req, res) => {
   try {
     const { email, password } = req.body;
-    const { error } = loginValidator(req.body);
+    const { error } = loginValidator.validate(req.body);
     if (error)
-      return res.status(400).render("auth/login/", {
+      return res.status(400).render("auth/login", {
         error: error.details[0].message,
       });
-
+ 
     const user = await User.findOne({ email });
     if (!user)
       return res.status(401).render("error/404", {
@@ -26,19 +26,19 @@ const login = async (req, res) => {
     if (!passwordMatch) {
       return res
         .status(401)
-        .render("/auth/login", { error: "Invalid email or password." });
-    };
+        .render("auth/login", { error: "Invalid email or password." });
+    }
     if (!user.isActive)
-      return res.status(403).render("/auth/login", {
+      return res.status(403).render("auth/login", {
         error: "Your account is inActive.",
       });
     req.session.user = {
       id: user._id,
       role: user.role,
-    };
-    if (user.role == "manager") return res.redirect("/manager/dashboard");
+    }
+    if (user.role === "manager") return res.redirect("/manager/dashboard");
 
-    if (user.role == "buyer") return res.redirect("/buyer/dashboard");
+    if (user.role === "buyer") return res.redirect("/buyer/dashboard");
   } catch (err) {
     console.error(err);
     return res.status(500).render("error/500", {
@@ -47,4 +47,16 @@ const login = async (req, res) => {
   }
 };
 
-module.exports = { login, loginForm };
+const logOut = async(req, res) =>{
+ req.session.destroy((error) =>{
+  if(error){
+    console.error(error);
+    return res.status(500).render("error/500", {error: "Something went wrong.."})
+  }
+  return res.redirect("auth/login");
+ })
+}
+
+
+
+module.exports = { logOut, login, loginForm };

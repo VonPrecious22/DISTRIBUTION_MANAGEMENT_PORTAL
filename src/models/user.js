@@ -24,6 +24,12 @@ const userSchema = new mongoose.Schema(
       enum: ["manager", "buyer"],
       required: true,
     },
+    password: {
+      type: String,
+      required: true,
+      minlenghth: 6,
+      maxlenghth: 20
+    },
     isActive: {
       type: Boolean,
       default: true,
