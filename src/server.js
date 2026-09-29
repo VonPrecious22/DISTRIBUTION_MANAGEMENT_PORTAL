@@ -12,12 +12,13 @@ const authRoute = require('./routes/authRoute');
 const managerRoute = require("./routes/managerRoute");
 const buyerRoute = require("./routes/buyerRoute");
 const MongoStore = require("connect-mongo").default;
-
+// const inventoryRoutes = require("./routes/inventoryRoutes");
 
 
 app.set("view engine", "ejs");
 app.set('views', path.join(__dirname, "views"));
 app.use(express.static(path.join(__dirname, "public")));
+app.use("/receipts", express.static(path.join(__dirname, "public/receipts")));
 app.use(methodOverride("_method"));
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
@@ -38,7 +39,7 @@ app.use(
 app.use("/auth", authRoute);
 app.use('/manager', managerRoute);
 app.use("/buyer", buyerRoute);
-
+// app.use("/inventory", inventoryRoutes);
 
 connectDatabase();
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

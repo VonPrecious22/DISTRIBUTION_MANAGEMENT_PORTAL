@@ -23,5 +23,10 @@ const createBuyer = async ({ name, email, contact, password, role }) => {
 
   return user;
 };
+const getBuyers = async() =>{
+  return User.find({role: "buyer"}).select("-password");
+}
 
-module.exports = { createBuyer };
+
+
+module.exports = { createBuyer, getBuyers };

@@ -1,0 +1,17 @@
+<h2>Create Product</h2>
+<% if (error) { %><p style="color:red"><%= error %></p><% } %>
+<form action="/manager/inventory/<%= inventoryId %>/products" method="POST">
+  <div>
+    <label>Product Name</label>
+    <input name="name" required>
+  </div>
+  <div>
+    <label>Quantity</label>
+    <input name="quantity" type="number" min="0" required>
+  </div>
+  <div>
+    <label>Price</label>
+    <input name="price" type="number" step="0.01" required>
+  </div>
+  <button type="submit">Create Product</button>   <!-- ← make sure this exists -->
+</form>

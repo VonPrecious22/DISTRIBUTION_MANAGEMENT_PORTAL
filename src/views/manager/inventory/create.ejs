@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create Inventory</title>
+</head>
+<body>
+
+    <h1>Create Inventory</h1>
+
+    <form action="/manager/inventory/create" method="POST">
+
+        <div>
+            <label>Inventory Name</label>
+            <input
+                type="text"
+                name="name"
+                required
+            >
+        </div>
+
+        <br>
+
+        <div>
+            <label>Category</label>
+
+            <select name="category" required>
+
+                <option value="">
+                    Select Category
+                </option>
+
+                <option value="Alcoholic">
+                    Alcoholic
+                </option>
+
+                <option value="Soft Drinks">
+                    Soft Drinks
+                </option>
+
+                <option value="Mineral Water">
+                    Mineral Water
+                </option>
+
+                <option value="Energy Drinks">
+                    Energy Drinks
+                </option>
+
+            </select>
+
+        </div>
+
+        <br>
+
+        <div>
+            <label>Description</label>
+
+            <textarea
+                name="description"
+                required
+            ></textarea>
+        </div>
+
+        <br>
+
+        <button type="submit">
+            Create Inventory
+        </button>
+
+    </form>
+
+    <br>
+
+    <a href="/manager/inventory">
+        Back to Inventory
+    </a>
+
+</body>
+</html>

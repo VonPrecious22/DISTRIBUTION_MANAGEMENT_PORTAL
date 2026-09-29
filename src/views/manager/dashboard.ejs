@@ -1,18 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Manager Dashboard</title>
-  <link rel="stylesheet" href="/css/style.css">
-</head>
+<%- include('../partials/head', { title: 'Manager Dashboard' }) %>
 <body>
-  <h2>Welcome, Manager</h2>
 
-  <nav>
-    <a href="/manager/buyers/create">Create Buyer Account</a>
-    <form action="/auth/logout?_method=DELETE" method="POST" style="display:inline">
-      <button type="submit">Logout</button>
-    </form>
-  </nav>
+  <%- include('../partials/sidebar', { role: 'manager' }) %>
+
+  <div class="main-content">
+    <%- include('../partials/topbar', { pageTitle: 'Dashboard' }) %>
+
+    <div class="content-inner">
+      <h2>Welcome, <%= user.name || 'Manager' %></h2>
+      <p>Brewery Drink Distribution Management System  overview of current operations.</p>
+
+      <div class="stats-grid">
+        <div class="stat-card">
+          <h3>Total Inventory Categories</h3>
+          <p><%= totalInventory %></p>
+        </div>
+        <div class="stat-card">
+          <h3>Total Products</h3>
+          <p><%= totalProducts %></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <%- include('../partials/scripts') %>
 </body>
 </html>

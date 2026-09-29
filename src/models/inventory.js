@@ -1,24 +1,21 @@
+const { required } = require("joi");
 const mongoose = require("mongoose");
 
 const inventorySchema = mongoose.Schema({
-    quantity: {
-        type: Number,
-        required: true,
-    },
     name: {
         type: String,
         required: true
     },
-    product: {
-        type: mongoose.Schema.Types.ObjectId,
+     category: {
+        type: String,
+         enum: ['Alcoholic', 'Soft Drinks', 'Mineral Water', 'Energy Drinks'],
         required: true,
-        ref: "Product",
+        unique: true
+     },
+    description: {
+        type: String,
+        required: true
     },
-    depot: {
-        type: mongoose.Schema.Types.ObjectId,
-        required: true,
-        ref: "Depot"
-    }
 },
 {timestamps: true}
 );

@@ -1,0 +1,25 @@
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <h2>Brewery Portal</h2>
+  </div>
+
+  <nav class="sidebar-nav">
+    <% if (role === 'manager') { %>
+      <a href="/manager/dashboard">Dashboard</a>
+      <a href="/manager/inventory">Inventory</a>
+      <a href="/manager/products">Products</a>
+<a href="/manager/buyers">Buyers</a>
+      <a href="/manager/orders">Orders</a>
+    <% } else if (role === 'buyer') { %>
+      <a href="/buyer/dashboard">Dashboard</a>
+      <a href="/buyer/products">Available Drinks</a>
+      <a href="/buyer/orders">My Orders</a>
+    <% } %>
+
+    <form action="/auth/logout?_method=DELETE" method="POST" class="logout-form">
+      <button type="submit">Logout</button>
+    </form>
+  </nav>
+</aside>
+
+<div class="sidebar-overlay" id="sidebarOverlay"></div>

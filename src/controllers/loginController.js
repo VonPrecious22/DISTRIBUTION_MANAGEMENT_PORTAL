@@ -1,5 +1,5 @@
 const bcrypt = require("bcryptjs");
-const { loginValidator } = require("../validate/userValidator");
+const { loginValidator } = require("../validator/userValidator");
 const User = require("../models/user");
 
 const loginForm = (req, res) => {
@@ -14,7 +14,7 @@ const login = async (req, res) => {
       return res.status(400).render("auth/login", {
         error: error.details[0].message,
       });
- 
+
     const user = await User.findOne({ email });
     if (!user)
       return res.status(401).render("error/404", {
@@ -35,7 +35,7 @@ const login = async (req, res) => {
     req.session.user = {
       id: user._id,
       role: user.role,
-    }
+    };
     if (user.role === "manager") return res.redirect("/manager/dashboard");
 
     if (user.role === "buyer") return res.redirect("/buyer/dashboard");
@@ -47,16 +47,16 @@ const login = async (req, res) => {
   }
 };
 
-const logOut = async(req, res) =>{
- req.session.destroy((error) =>{
-  if(error){
-    console.error(error);
-    return res.status(500).render("error/500", {error: "Something went wrong.."})
-  }
-  return res.redirect("auth/login");
- })
-}
-
-
+const logOut = async (req, res) => {
+  req.session.destroy((error) => {
+    if (error) {
+      console.error(error);
+      return res
+        .status(500)
+        .render("error/500", { error: "Something went wrong.." });
+    }
+    return res.redirect("auth/login");
+  });
+};
 
 module.exports = { logOut, login, loginForm };

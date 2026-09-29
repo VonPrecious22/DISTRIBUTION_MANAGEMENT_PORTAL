@@ -1,0 +1,16 @@
+<h2><%= result.inventory.category %></h2>
+<p>Total Quantity: <%= result.totalQuantity %></p>
+
+<a href="/manager/inventory/<%= result.inventory._id %>/products/create">+ Add Product</a>
+
+<table border="1">
+  <tr><th>Name</th><th>Quantity</th><th>Price</th><th>Action</th></tr>
+  <% products.forEach(p => { %>
+    <tr>
+      <td><%= p.name %></td>
+      <td><%= p.quantity %></td>
+      <td><%= p.price %></td>
+      <td><a href="/manager/products/<%= p._id %>/edit">Edit</a></td>
+    </tr>
+  <% }) %>
+</table>

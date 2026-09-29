@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const productSchema = mongoose.Schema({
     name: {
-        type: string,
+        type: String,
         required: true,
     },
     quantity: {
@@ -12,15 +12,11 @@ const productSchema = mongoose.Schema({
     price: {
         type: Number,
         required: true
-    },
-    isActive: {
-        type: Boolean,
-        required: true
-    },
-   category: {
-  type: string,
-  enum: ['Alcoholic', 'Soft Drinks', 'Natural Water', 'Energy Drinks'],
-  required: true
+        },
+    inventory: {
+        type: mongoose.Types.ObjectId,
+        required: true,
+        ref: "Inventory"
     }
 }, {timestamps: true});
 

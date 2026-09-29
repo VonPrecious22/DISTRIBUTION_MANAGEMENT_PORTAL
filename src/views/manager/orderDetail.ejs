@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('../partials/head', { title: 'Order Detail' }) %>
+<body>
+  <%- include('../partials/sidebar', { role: 'manager' }) %>
+
+  <div class="main-content">
+    <%- include('../partials/topbar', { pageTitle: 'Order Detail' }) %>
+
+    <div class="content-inner">
+      <a href="/manager/orders">← Back to Orders</a>
+
+      <h2>Order from <%= order.buyer.name %></h2>
+      <p>Email: <%= order.buyer.email %> | Contact: <%= order.buyer.contact %></p>
+      <p>Placed on <%= order.createdAt.toLocaleDateString() %></p>
+      <p>Status:
+        <span class="badge badge-<%= order.status.toLowerCase() %>"><%= order.status.replace('_', ' ') %></span>
+      </p>
+
+      <div class="table-wrap">
+        <table class="data-table">
+          <tr><th>Item</th><th>Qty</th><th>Unit Price</th><th>Subtotal</th></tr>
+          <% order.items.forEach(item => { %>
+            <tr>
+              <td><%= item.name %></td>
+              <td><%= item.quantity %></td>
+              <td><%= item.unitPrice %></td>
+              <td><%= item.subtotal %></td>
+            </tr>
+          <% }) %>
+        </table>
+      </div>
+
+      <p><strong>Total: <%= order.totalAmount %> FCFA</strong></p>
+
+      <% if (order.pdfPath) { %>
+        <p><a href="<%= order.pdfPath %>" target="_blank">View order PDF</a></p>
+      <% } %>
+
+      <% if (order.status === 'PENDING') { %>
+        <form action="/manager/orders/<%= order._id %>/approve?_method=PATCH" method="POST" style="display:inline">
+          <button type="submit" class="btn btn-primary">Approve</button>
+        </form>
+        <form action="/manager/orders/<%= order._id %>/reject?_method=PATCH" method="POST" style="display:inline">
+          <button type="submit" class="btn btn-danger">Reject</button>
+        </form>
+      <% } %>
+    </div>
+  </div>
+
+  <%- include('../partials/scripts') %>
+</body>
+</html>

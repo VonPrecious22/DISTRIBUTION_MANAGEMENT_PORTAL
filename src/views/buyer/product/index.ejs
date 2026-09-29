@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('../../partials/head', { title: 'Available Drinks' }) %>
+<body>
+  <%- include('../../partials/sidebar', { role: 'buyer' }) %>
+
+  <div class="main-content">
+    <%- include('../../partials/topbar', { pageTitle: 'Available Drinks' }) %>
+
+    <div class="content-inner">
+      <% if (error) { %><p class="error-text"><%= error %></p><% } %>
+
+      <% if (products.length === 0) { %>
+        <p>No products are available yet.</p>
+      <% } else { %>
+        <form action="/buyer/orders" method="POST">
+          <div class="table-wrap">
+            <table class="data-table">
+              <tr>
+                <th>Drink</th>
+                <th>Category</th>
+                <th>Price (FCFA)</th>
+                <th>In Stock</th>
+                <th>Quantity</th>
+              </tr>
+              <% products.forEach(p => { %>
+                <tr>
+                  <td><%= p.name %></td>
+                  <td><%= p.inventory ? p.inventory.category : '-' %></td>
+                  <td><%= p.price %></td>
+                  <td><%= p.quantity %></td>
+                  <td>
+                    <input
+                      type="number"
+                      name="quantities[<%= p._id %>]"
+                      min="0"
+                      max="<%= p.quantity %>"
+                      value="0"
+                      <%= p.quantity === 0 ? 'disabled' : '' %>
+                    >
+                  </td>
+                </tr>
+              <% }) %>
+            </table>
+          </div>
+
+          <button type="submit" class="btn btn-primary">Submit Order</button>
+        </form>
+      <% } %>
+    </div>
+  </div>
+
+  <%- include('../../partials/scripts') %>
+</body>
+</html>

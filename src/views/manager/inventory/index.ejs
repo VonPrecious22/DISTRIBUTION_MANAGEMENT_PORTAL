@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Inventory</title>
+</head>
+<body>
+
+    <h1>All Inventory</h1>
+
+    <a href="/manager/dashboard">Dashboard</a>
+    <br><br>
+
+    <a href="/manager/inventory/create">Create Inventory</a>
+
+    <hr>
+
+    <% if (inventories.length === 0) { %>
+
+        <p>No inventory found.</p>
+
+    <% } else { %>
+
+        <% inventories.forEach(inventory => { %>
+
+            <div>
+                <h2><%= inventory.name %></h2>
+
+                <p>
+                    Category:
+                    <%= inventory.category %>
+                </p>
+
+                <p>
+                    Description:
+                    <%= inventory.description %>
+                </p>
+
+                <a href="/manager/inventory/<%= inventory._id %>">
+                    View Inventory
+                </a>
+            </div>
+
+            <hr>
+
+        <% }) %>
+
+    <% } %>
+
+</body>
+</html>

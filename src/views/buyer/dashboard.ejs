@@ -1,15 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Buyer Dashboard</title>
-  <link rel="stylesheet" href="/css/style.css">
-</head>
+<%- include('../partials/head', { title: 'Buyer Dashboard' }) %>
 <body>
-  <h2>Welcome, Buyer</h2>
 
-  <form action="/auth/logout?_method=DELETE" method="POST">
-    <button type="submit">Logout</button>
-  </form>
+  <%- include('../partials/sidebar', { role: 'buyer' }) %>
+
+  <div class="main-content">
+    <%- include('../partials/topbar', { pageTitle: 'Dashboard' }) %>
+
+    <div class="content-inner">
+      <h2>Welcome, <%= user.name || 'Buyer' %></h2>
+      <p>Browse available drinks and track your orders below.</p>
+    </div>
+  </div>
+
+  <%- include('../partials/scripts') %>
 </body>
 </html>

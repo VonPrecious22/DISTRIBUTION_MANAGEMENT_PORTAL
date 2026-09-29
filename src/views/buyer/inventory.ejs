@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Available Inventory</title>
+</head>
+<body>
+
+    <h1>Available Inventory</h1>
+
+    <a href="/buyer/dashboard">
+        Dashboard
+    </a>
+
+    <hr>
+
+    <% if (inventories.length === 0) { %>
+
+        <p>No inventory available.</p>
+
+    <% } else { %>
+
+        <% inventories.forEach(inventory => { %>
+
+            <div>
+
+                <h2>
+                    <%= inventory.name %>
+                </h2>
+
+                <p>
+                    Category:
+                    <%= inventory.category %>
+                </p>
+
+                <p>
+                    <%= inventory.description %>
+                </p>
+
+                <a href="/buyer/inventory/<%= inventory._id %>">
+                    View
+                </a>
+
+            </div>
+
+            <hr>
+
+        <% }) %>
+
+    <% } %>
+
+</body>
+</html>
