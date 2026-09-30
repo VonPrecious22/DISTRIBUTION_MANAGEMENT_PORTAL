@@ -1,41 +1,109 @@
 <!DOCTYPE html>
 <html lang="en">
-<%- include('../partials/head', { title: 'My Orders' }) %>
-<body>
-  <%- include('../partials/sidebar', { role: 'buyer' }) %>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <div class="main-content">
-    <%- include('../partials/topbar', { pageTitle: 'My Orders' }) %>
+  <title>My Orders</title>
+
+<link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/sidebar.css">
+  <link rel="stylesheet" href="/css/table.css">
+  <link rel="stylesheet" href="/css/badge.css">
+  <link rel="stylesheet" href="/css/order.css">
+</head>
+
+<body>
+
+  <%- include('../partials/sidebar', {
+    role: 'buyer',
+    currentPath: '/buyer/orders'
+  }) %>
+
+  <main class="main-content">
+
+    <div class="topbar">
+      <h1>My Orders</h1>
+    </div>
 
     <div class="content-inner">
+
+      <h2 class="page-title">My Orders</h2>
+
       <% if (orders.length === 0) { %>
-        <p>You have not placed any orders yet.</p>
-        <a href="/buyer/products" class="btn btn-primary">Browse Drinks</a>
+
+        <div class="empty-orders">
+          <p>You have not placed any orders yet.</p>
+
+          <a href="/buyer/products" class="btn btn-primary">
+            Browse Drinks
+          </a>
+        </div>
+
       <% } else { %>
+
         <div class="table-wrap">
           <table class="data-table">
-            <tr>
-              <th>Date</th>
-              <th>Items</th>
-              <th>Total (FCFA)</th>
-              <th>Status</th>
-              <th>Action</th>
-            </tr>
-            <% orders.forEach(order => { %>
+            <thead>
               <tr>
-                <td><%= order.createdAt.toLocaleDateString() %></td>
-                <td><%= order.items.map(i => i.name + ' x' + i.quantity).join(', ') %></td>
-                <td><%= order.totalAmount %></td>
-                <td><span class="badge badge-<%= order.status.toLowerCase() %>"><%= order.status.replace('_', ' ') %></span></td>
-                <td><a href="/buyer/orders/<%= order._id %>">View</a></td>
+                <th scope="col">Order Date</th>
+                <th scope="col">Items</th>
+                <th scope="col">Total Amount (FCFA)</th>
+                <th scope="col">Order Status</th>
+                <th scope="col">Action</th>
               </tr>
-            <% }) %>
+            </thead>
+
+            <tbody>
+              <% orders.forEach(order => { %>
+                <tr>
+                  <td>
+                    <%= order.createdAt.toLocaleDateString() %>
+                  </td>
+
+                  <td>
+                    <%= order.items
+                      .map(i => i.name + ' x' + i.quantity)
+                      .join(', ') %>
+                  </td>
+
+                  <td>
+                    <%= order.totalAmount %>
+                  </td>
+
+                  <td>
+                    <span class="badge badge-<%= order.status.toLowerCase() %>">
+                      <%= order.status.replace('_', ' ') %>
+                    </span>
+                  </td>
+
+                  <td>
+                    <a
+                      href="/buyer/orders/<%= order._id %>"
+                      class="view-link"
+                    >
+                      View
+                    </a>
+
+                    <% if (order.status === "PAYMENT_PENDING") { %>
+                      <a
+                        href="/buyer/payment/pay/<%= order._id %>"
+                        class="btn btn-primary"
+                      >
+                        Pay Now
+                      </a>
+                    <% } %>
+                  </td>
+                </tr>
+              <% }) %>
+            </tbody>
           </table>
         </div>
-      <% } %>
-    </div>
-  </div>
 
-  <%- include('../partials/scripts') %>
+      <% } %>
+
+    </div>
+  </main>
+
 </body>
 </html>

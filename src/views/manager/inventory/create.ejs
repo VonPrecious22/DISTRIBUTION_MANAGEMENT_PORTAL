@@ -1,78 +1,83 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Create Inventory</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Create Inventory</title>
+
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/sidebar.css">
+  <link rel="stylesheet" href="/css/createinventory.css">
 </head>
+
 <body>
+  <%- include('../../partials/sidebar', {
+    role: 'manager',
+    currentPath: '/manager/inventory'
+  }) %>
 
-    <h1>Create Inventory</h1>
+  <main class="main-content">
+    <div class="content-inner">
+      <div class="create-inventory">
 
-    <form action="/manager/inventory/create" method="POST">
+        <h2 class="page-title">Create Inventory</h2>
 
-        <div>
-            <label>Inventory Name</label>
+        <form
+          action="/manager/inventory/create"
+          method="POST"
+          class="form-card"
+        >
+          <div class="form-group">
+            <label for="name">Inventory Name</label>
             <input
-                type="text"
-                name="name"
-                required
+              type="text"
+              id="name"
+              name="name"
+              placeholder="Enter inventory name"
+              required
             >
-        </div>
+          </div>
 
-        <br>
+          <div class="form-group">
+            <label for="category">Category</label>
 
-        <div>
-            <label>Category</label>
-
-            <select name="category" required>
-
-                <option value="">
-                    Select Category
-                </option>
-
-                <option value="Alcoholic">
-                    Alcoholic
-                </option>
-
-                <option value="Soft Drinks">
-                    Soft Drinks
-                </option>
-
-                <option value="Mineral Water">
-                    Mineral Water
-                </option>
-
-                <option value="Energy Drinks">
-                    Energy Drinks
-                </option>
-
+            <select id="category" name="category" required>
+              <option value="">Select Category</option>
+              <option value="Alcoholic">Alcoholic</option>
+              <option value="Soft Drinks">Soft Drinks</option>
+              <option value="Mineral Water">Mineral Water</option>
+              <option value="Energy Drinks">Energy Drinks</option>
             </select>
+          </div>
 
-        </div>
-
-        <br>
-
-        <div>
-            <label>Description</label>
+          <div class="form-group">
+            <label for="description">Description</label>
 
             <textarea
-                name="description"
-                required
+              id="description"
+              name="description"
+              placeholder="Enter inventory description"
+              required
             ></textarea>
-        </div>
+          </div>
 
-        <br>
+          <div class="form-actions">
+            <button type="submit" class="btn-create">
+              Create Inventory
+            </button>
 
-        <button type="submit">
-            Create Inventory
-        </button>
+            <a
+              href="/manager/inventory"
+              class="btn-back"
+            >
+              Back to Inventory
+            </a>
+          </div>
+        </form>
 
-    </form>
-
-    <br>
-
-    <a href="/manager/inventory">
-        Back to Inventory
-    </a>
-
+      </div>
+    </div>
+  </main>
 </body>
 </html>

@@ -1,19 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
-<%- include('../partials/head', { title: 'Buyer Dashboard' }) %>
+
+<%- include('../partials/head', {
+  title: 'Buyer Dashboard'
+}) %>
+
 <body>
 
-  <%- include('../partials/sidebar', { role: 'buyer' }) %>
+  <%- include('../partials/sidebar', {
+    role: 'buyer',
+    currentPath: '/buyer/dashboard'
+  }) %>
 
-  <div class="main-content">
-    <%- include('../partials/topbar', { pageTitle: 'Dashboard' }) %>
+  <main class="main-content">
+    <%- include('../partials/topbar', {
+      pageTitle: 'Dashboard'
+    }) %>
 
     <div class="content-inner">
       <h2>Welcome, <%= user.name || 'Buyer' %></h2>
-      <p>Browse available drinks and track your orders below.</p>
+
+      <p>
+        Browse available drinks and track your orders below.
+      </p>
     </div>
-  </div>
+  </main>
 
   <%- include('../partials/scripts') %>
+
 </body>
 </html>

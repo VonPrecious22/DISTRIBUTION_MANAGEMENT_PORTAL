@@ -1,54 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
-<%- include('../../partials/head', { title: 'Available Drinks' }) %>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Available Drinks</title>
+
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/sidebar.css">
+  <link rel="stylesheet" href="/css/drink.css">
+</head>
+
 <body>
-  <%- include('../../partials/sidebar', { role: 'buyer' }) %>
+  <%- include('../../partials/sidebar', {
+    role: 'buyer',
+    currentPath: '/buyer/products'
+  }) %>
 
-  <div class="main-content">
-    <%- include('../../partials/topbar', { pageTitle: 'Available Drinks' }) %>
+  <main class="main-content">
+    <%- include('../../partials/topbar', {
+      pageTitle: 'Available Drinks'
+    }) %>
 
-    <div class="content-inner">
-      <% if (error) { %><p class="error-text"><%= error %></p><% } %>
+    <div class="content-inner available-drinks">
+
+      <h2 class="page-title">Available Drinks</h2>
+
+      <% if (error) { %>
+        <p class="error-text">
+          <%= error %>
+        </p>
+      <% } %>
 
       <% if (products.length === 0) { %>
-        <p>No products are available yet.</p>
+
+        <div class="empty-state">
+          <p>No products are available yet.</p>
+        </div>
+
       <% } else { %>
+
         <form action="/buyer/orders" method="POST">
           <div class="table-wrap">
             <table class="data-table">
-              <tr>
-                <th>Drink</th>
-                <th>Category</th>
-                <th>Price (FCFA)</th>
-                <th>In Stock</th>
-                <th>Quantity</th>
-              </tr>
-              <% products.forEach(p => { %>
+              <thead>
                 <tr>
-                  <td><%= p.name %></td>
-                  <td><%= p.inventory ? p.inventory.category : '-' %></td>
-                  <td><%= p.price %></td>
-                  <td><%= p.quantity %></td>
-                  <td>
-                    <input
-                      type="number"
-                      name="quantities[<%= p._id %>]"
-                      min="0"
-                      max="<%= p.quantity %>"
-                      value="0"
-                      <%= p.quantity === 0 ? 'disabled' : '' %>
-                    >
-                  </td>
+                  <th scope="col">Drink Name</th>
+                  <th scope="col">Category</th>
+                  <th scope="col">Price (FCFA)</th>
+                  <th scope="col">Available Stock</th>
+                  <th scope="col">Order Quantity</th>
                 </tr>
-              <% }) %>
+              </thead>
+
+              <tbody>
+                <% products.forEach(p => { %>
+                  <tr>
+                    <td><%= p.name %></td>
+
+                    <td>
+                      <%= p.inventory ? p.inventory.category : '-' %>
+                    </td>
+
+                    <td><%= p.price %></td>
+
+                    <td><%= p.quantity %></td>
+
+                    <td>
+                      <input
+                        type="number"
+                        class="quantity-input"
+                        name="quantities[<%= p._id %>]"
+                        min="0"
+                        max="<%= p.quantity %>"
+                        value="0"
+                        <%= p.quantity === 0 ? 'disabled' : '' %>
+                      >
+                    </td>
+                  </tr>
+                <% }) %>
+              </tbody>
             </table>
           </div>
 
-          <button type="submit" class="btn btn-primary">Submit Order</button>
+          <div class="submit-order-container">
+            <button type="submit" class="btn btn-primary">
+              Submit Order
+            </button>
+          </div>
         </form>
+
       <% } %>
+
     </div>
-  </div>
+  </main>
 
   <%- include('../../partials/scripts') %>
 </body>

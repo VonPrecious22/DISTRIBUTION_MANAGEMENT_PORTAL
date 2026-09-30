@@ -1,0 +1,111 @@
+:root {
+  --primary: #c0392b;
+  --primary-dark: #962d22;
+  --text-dark: #333333;
+  --text-muted: #6b6b6b;
+  --border: #d3d3d3;
+  --light-background: #f8f8f8;
+}
+
+/* Inventory details only */
+.inventory-details {
+  width: 100%;
+}
+
+.inventory-details .detail-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 25px;
+}
+
+.inventory-details .page-title {
+  margin: 0;
+}
+
+.inventory-details .quantity-summary {
+  width: fit-content;
+  margin-bottom: 25px;
+  padding: 14px 20px;
+  border-left: 4px solid var(--primary);
+  background-color: var(--light-background);
+  color: var(--text-muted);
+}
+
+.inventory-details .quantity-summary span {
+  margin-right: 8px;
+}
+
+.inventory-details .quantity-summary strong {
+  color: var(--text-dark);
+  font-size: 18px;
+}
+
+.inventory-details .table-wrap {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.inventory-details .data-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #ffffff;
+  border: 1px solid var(--border);
+}
+
+.inventory-details .data-table th {
+  padding: 14px 16px;
+  background-color: var(--primary);
+  color: #ffffff;
+  border: 1px solid var(--primary-dark);
+  text-align: left;
+}
+
+.inventory-details .data-table td {
+  padding: 13px 16px;
+  border: 1px solid var(--border);
+  color: var(--text-dark);
+}
+
+.inventory-details .data-table tbody tr:nth-child(even) {
+  background-color: var(--light-background);
+}
+
+.inventory-details .data-table tbody tr:hover {
+  background-color: #f1e5e3;
+}
+
+.inventory-details .btn-edit {
+  padding: 7px 12px;
+  font-size: 15px;
+}
+
+.inventory-details .empty-state {
+  padding: 22px;
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--primary);
+  background-color: var(--light-background);
+  text-align: center;
+}
+
+.inventory-details .empty-state p {
+  margin: 0;
+  color: var(--text-muted);
+}
+
+@media (max-width: 650px) {
+  .inventory-details .detail-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .inventory-details .detail-header .btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .inventory-details .data-table {
+    min-width: 650px;
+  }
+}

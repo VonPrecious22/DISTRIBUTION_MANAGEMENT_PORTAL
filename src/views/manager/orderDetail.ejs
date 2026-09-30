@@ -1,16 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
-<%- include('../partials/head', { title: 'Order Detail' }) %>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Order Detail</title>
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/sidebar.css">
+  <link rel="stylesheet" href="/css/table.css">
+  <link rel="stylesheet" href="/css/badge.css">
+  <link rel="stylesheet" href="/css/button.css">
+</head>
 <body>
-  <%- include('../partials/sidebar', { role: 'manager' }) %>
+  <%- include('../partials/sidebar', { role: 'manager', currentPath: '/manager/orders' }) %>
 
   <div class="main-content">
-    <%- include('../partials/topbar', { pageTitle: 'Order Detail' }) %>
-
     <div class="content-inner">
       <a href="/manager/orders">← Back to Orders</a>
 
-      <h2>Order from <%= order.buyer.name %></h2>
+      <h2 class="page-title">Order from <%= order.buyer.name %></h2>
       <p>Email: <%= order.buyer.email %> | Contact: <%= order.buyer.contact %></p>
       <p>Placed on <%= order.createdAt.toLocaleDateString() %></p>
       <p>Status:
@@ -47,7 +54,5 @@
       <% } %>
     </div>
   </div>
-
-  <%- include('../partials/scripts') %>
 </body>
 </html>

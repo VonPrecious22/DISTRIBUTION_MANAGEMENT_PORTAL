@@ -24,7 +24,6 @@ const createOrder = async (req, res) => {
         items.push({ productId: productId, quantity: quantity });
       }
     }
-    // the buyer must select at least one product
     if (items.length === 0) {
       const products = await getAllProducts();
       return res.status(400).render("buyer/product/index", {
@@ -32,7 +31,7 @@ const createOrder = async (req, res) => {
         error: "Please select at least one product.",
       });
     }
-    // validate the items
+   
     const { error } = createOrderValidator.validate({ items: items });
     if (error) {
       const products = await getAllProducts();
@@ -76,15 +75,6 @@ const buyerOrders = async (req, res) => {
 const buyerOrderDetail = async (req, res) => {
   try {
     const order = await orderService.getOrderById(req.params.orderId);
-    // a buyer can only see their own orders
-    // if (
-    //   !order.buyer ||
-    //   order.buyer._id.toString() !== req.session.user.id.toString()
-    // ) {
-    //   return res.status(403).render("error/500", {
-    //     error: "You are not allowed to view this order.",
-    //   });
-    // }
     res.render("buyer/orderDetail", { order: order });
   } catch (err) {
     console.log(err);

@@ -12,6 +12,7 @@ const authRoute = require('./routes/authRoute');
 const managerRoute = require("./routes/managerRoute");
 const buyerRoute = require("./routes/buyerRoute");
 const MongoStore = require("connect-mongo").default;
+const paymentRoutes = require("./routes/paymentRoute");
 // const inventoryRoutes = require("./routes/inventoryRoutes");
 
 
@@ -39,6 +40,7 @@ app.use(
 app.use("/auth", authRoute);
 app.use('/manager', managerRoute);
 app.use("/buyer", buyerRoute);
+app.use("/buyer/payment", paymentRoutes);
 // app.use("/inventory", inventoryRoutes);
 
 connectDatabase();

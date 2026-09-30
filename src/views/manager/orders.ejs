@@ -1,40 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
-<%- include('../partials/head', { title: 'Orders' }) %>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Orders</title>
+
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/sidebar.css">
+  <link rel="stylesheet" href="/css/table.css">
+  <link rel="stylesheet" href="/css/badge.css">
+</head>
+
 <body>
-  <%- include('../partials/sidebar', { role: 'manager' }) %>
+  <%- include('../partials/sidebar', {
+    role: 'manager',
+    currentPath: '/manager/orders'
+  }) %>
 
   <div class="main-content">
-    <%- include('../partials/topbar', { pageTitle: 'Orders' }) %>
-
     <div class="content-inner">
+      <h2 class="page-title">Orders</h2>
+
       <% if (orders.length === 0) { %>
+
         <p>No orders have been received yet.</p>
+
       <% } else { %>
+
         <div class="table-wrap">
           <table class="data-table">
-            <tr>
-              <th>Date</th>
-              <th>Buyer</th>
-              <th>Total (FCFA)</th>
-              <th>Status</th>
-              <th>Action</th>
-            </tr>
-            <% orders.forEach(order => { %>
+
+            <!-- Table column titles -->
+            <thead>
               <tr>
-                <td><%= order.createdAt.toLocaleDateString() %></td>
-                <td><%= order.buyer ? order.buyer.name : 'Unknown' %></td>
-                <td><%= order.totalAmount %></td>
-                <td><span class="badge badge-<%= order.status.toLowerCase() %>"><%= order.status.replace('_', ' ') %></span></td>
-                <td><a href="/manager/orders/<%= order._id %>">Review</a></td>
+                <th scope="col">Order Date</th>
+                <th scope="col">Buyer Name</th>
+                <th scope="col">Total Amount (FCFA)</th>
+                <th scope="col">Order Status</th>
+                <th scope="col">Action</th>
               </tr>
-            <% }) %>
+            </thead>
+
+            <!-- Order records -->
+            <tbody>
+              <% orders.forEach(order => { %>
+                <tr>
+                  <td>
+                    <%= order.createdAt.toLocaleDateString() %>
+                  </td>
+
+                  <td>
+                    <%= order.buyer ? order.buyer.name : 'Unknown' %>
+                  </td>
+
+                  <td>
+                    <%= order.totalAmount %>
+                  </td>
+
+                  <td>
+                    <span class="badge badge-<%= order.status.toLowerCase() %>">
+                      <%= order.status.replace('_', ' ') %>
+                    </span>
+                  </td>
+
+                  <td>
+                    <a href="/manager/orders/<%= order._id %>">
+                      Review
+                    </a>
+                  </td>
+                </tr>
+              <% }) %>
+            </tbody>
+
           </table>
         </div>
+
       <% } %>
     </div>
   </div>
-
-  <%- include('../partials/scripts') %>
 </body>
 </html>

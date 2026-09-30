@@ -1,50 +1,81 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Inventory</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Inventory</title>
+
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/sidebar.css">
+  <link rel="stylesheet" href="/css/button.css">
+  <link rel="stylesheet" href="/css/inventory.css">
 </head>
+
 <body>
+  <%- include('../../partials/sidebar', {
+    role: 'manager',
+    currentPath: '/manager/inventory'
+  }) %>
 
-    <h1>All Inventory</h1>
+  <div class="main-content">
+    <div class="content-inner">
 
-    <a href="/manager/dashboard">Dashboard</a>
-    <br><br>
+      <div class="page-header">
+        <h2 class="page-title">Inventory</h2>
 
-    <a href="/manager/inventory/create">Create Inventory</a>
+        <a
+          href="/manager/inventory/create"
+          class="btn btn-primary"
+        >
+          + Create Inventory
+        </a>
+      </div>
 
-    <hr>
+      <% if (inventories.length === 0) { %>
 
-    <% if (inventories.length === 0) { %>
+        <div class="empty-state">
+          <p>No inventory found.</p>
+        </div>
 
-        <p>No inventory found.</p>
+      <% } else { %>
 
-    <% } else { %>
+        <div class="inventory-grid">
+          <% inventories.forEach(inventory => { %>
 
-        <% inventories.forEach(inventory => { %>
+            <div class="inventory-card">
+              <div class="inventory-card-header">
+                <h3><%= inventory.name %></h3>
+              </div>
 
-            <div>
-                <h2><%= inventory.name %></h2>
-
+              <div class="inventory-card-body">
                 <p>
-                    Category:
-                    <%= inventory.category %>
+                  <span class="inventory-label">Category:</span>
+                  <%= inventory.category %>
                 </p>
 
                 <p>
-                    Description:
-                    <%= inventory.description %>
+                  <span class="inventory-label">Description:</span>
+                  <%= inventory.description %>
                 </p>
+              </div>
 
-                <a href="/manager/inventory/<%= inventory._id %>">
-                    View Inventory
+              <div class="inventory-card-footer">
+                <a
+                  href="/manager/inventory/<%= inventory._id %>"
+                  class="btn btn-primary"
+                >
+                  View Inventory
                 </a>
+              </div>
             </div>
 
-            <hr>
+          <% }) %>
+        </div>
 
-        <% }) %>
+      <% } %>
 
-    <% } %>
-
+    </div>
+  </div>
 </body>
 </html>

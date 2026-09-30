@@ -1,35 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
-<%- include('../partials/head', { title: 'Buyers' }) %>
-<body>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Buyers</title>
 
-  <%- include('../partials/sidebar', { role: 'manager' }) %>
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/sidebar.css">
+  <link rel="stylesheet" href="/css/table.css">
+  <link rel="stylesheet" href="/css/button.css">
+</head>
+
+<body>
+  <%- include('../partials/sidebar', {
+    role: 'manager',
+    currentPath: '/manager/buyers'
+  }) %>
 
   <div class="main-content">
-    <%- include('../partials/topbar', { pageTitle: 'Buyers' }) %>
-
     <div class="content-inner">
-      <a href="/manager/buyers/create">+ Create New Buyer</a>
+      <h2 class="page-title">Buyers</h2>
 
-      <table border="1" style="width: 100%; margin-top: 16px; border-collapse: collapse;">
-        <tr>
-          <th>Name</th>
-          <th>Email</th>
-          <th>Contact</th>
-          <th>Status</th>
-        </tr>
-        <% buyers.forEach(buyer => { %>
-          <tr>
-            <td><%= buyer.name %></td>
-            <td><%= buyer.email %></td>
-            <td><%= buyer.contact %></td>
-            <td><%= buyer.isActive ? "Active" : "Inactive" %></td>
-          </tr>
-        <% }) %>
-      </table>
+      <a href="/manager/buyers/create" class="btn btn-primary">
+        + Create New Buyer
+      </a>
+
+      <div class="table-wrap" style="margin-top: 16px;">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th scope="col">Buyer Name</th>
+              <th scope="col">Email Address</th>
+              <th scope="col">Contact Number</th>
+              <th scope="col">Account Status</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <% buyers.forEach(buyer => { %>
+              <tr>
+                <td><%= buyer.name %></td>
+                <td><%= buyer.email %></td>
+                <td><%= buyer.contact %></td>
+                <td>
+                  <%= buyer.isActive ? "Active" : "Inactive" %>
+                </td>
+              </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
-
-  <%- include('../partials/scripts') %>
 </body>
 </html>

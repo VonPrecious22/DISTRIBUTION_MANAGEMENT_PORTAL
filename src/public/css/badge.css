@@ -1,0 +1,14 @@
+.badge {
+  padding: 4px 12px;
+  border-radius: 4px;
+  font-size: 13px;
+  color: #ffffff;
+  background: var(--text-muted);
+}
+
+.badge-pending { background: var(--text-muted); }
+.badge-payment_pending { background: #7a7a7a; }
+.badge-approved,
+.badge-paid,
+.badge-completed { background: #333333; }
+.badge-rejected { background: var(--primary); }

@@ -1,41 +1,92 @@
 <!DOCTYPE html>
 <html lang="en">
-<%- include('../partials/head', { title: 'Create Buyer' }) %>
-<body>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Buyer</title>
 
-  <%- include('../partials/sidebar', { role: 'manager' }) %>
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/sidebar.css">
+  <link rel="stylesheet" href="/css/form.css">
+  <link rel="stylesheet" href="/css/button.css">
+</head>
+
+<body>
+  <%- include('../partials/sidebar', {
+    role: 'manager',
+    currentPath: '/manager/buyers'
+  }) %>
 
   <div class="main-content">
-    <%- include('../partials/topbar', { pageTitle: 'Create Buyer Account' }) %>
-
     <div class="content-inner">
-      <a href="/manager/buyers">← Back to Buyers List</a>
+      <h2 class="page-title">Create New Buyer</h2>
 
-      <h2>Create Buyer Account</h2>
-      <% if (error) { %><p style="color:red"><%= error %></p><% } %>
+      <% if (error) { %>
+        <div class="error">
+          <%= error %>
+        </div>
+      <% } %>
 
-      <form action="/manager/buyers" method="POST">
-        <div>
-          <label>Full Name</label>
-          <input type="text" name="name" required>
-        </div>
-        <div>
-          <label>Email</label>
-          <input type="email" name="email" required>
-        </div>
-        <div>
-          <label>Contact</label>
-          <input type="text" name="contact" required>
-        </div>
-        <div>
-          <label>Temporary Password</label>
-          <input type="password" name="password" required>
-        </div>
-        <button type="submit">Create Buyer</button>
-      </form>
-    </div>
+      <form
+  action="/manager/buyers/create"
+  method="POST"
+  class="form-card"
+>
+  <div class="form-group">
+    <label for="name">Buyer Name</label>
+    <input
+      type="text"
+      id="name"
+      name="name"
+      placeholder="Enter buyer name"
+      required
+    >
   </div>
 
-  <%- include('../partials/scripts') %>
+  <div class="form-group">
+    <label for="email">Email Address</label>
+    <input
+      type="email"
+      id="email"
+      name="email"
+      placeholder="Enter email address"
+      required
+    >
+  </div>
+
+  <div class="form-group">
+    <label for="password">Password</label>
+    <input
+      type="password"
+      id="password"
+      name="password"
+      placeholder="Enter buyer password"
+      minlength="6"
+      required
+    >
+  </div>
+
+  <div class="form-group">
+    <label for="contact">Contact Number</label>
+    <input
+      type="text"
+      id="contact"
+      name="contact"
+      placeholder="Enter contact number"
+      required
+    >
+  </div>
+
+  <button type="submit" class="btn btn-primary">
+    Create Buyer
+  </button>
+
+  <a href="/manager/buyers" class="btn btn-secondary">
+    Cancel
+  </a>
+</form>
+
+    </div>
+  </div>
 </body>
 </html>

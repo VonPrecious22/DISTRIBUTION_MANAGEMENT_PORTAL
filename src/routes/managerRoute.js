@@ -10,6 +10,7 @@ const {
   dashboard,
   getAllBuyers,
 } = require("../controllers/createBuyerController");
+
 const {
   inventoryForm,
   getAllInventory,
@@ -35,26 +36,27 @@ router.use(isAuthenticated, requireRole("manager"));
 
 router.get("/dashboard", dashboard);
 
-//create buyer
+// Buyer routes
 router.get("/buyers", getAllBuyers);
 router.get("/buyers/create", createBuyerForm);
-router.post("/buyers", createBuyer);
+router.post("/buyers/create", createBuyer);
 
-//Inventory
+// Inventory routes
 router.get("/inventory", getAllInventory);
 router.get("/inventory/create", inventoryForm);
 router.post("/inventory/create", createInventory);
 router.get("/inventory/:inventoryId", getInventoryQuantity);
 
-//product routes
+// Product routes
 router.get("/inventory/:inventoryId/products/create", productForm);
 router.post("/inventory/:inventoryId/products", createNewProduct);
 router.get("/products", getProducts);
 router.patch("/products/:productId", updateExistingProduct);
-module.exports = router;
 
-// Orders
+// Order routes
 router.get("/orders", managerOrders);
 router.get("/orders/:orderId", managerOrderDetail);
 router.patch("/orders/:orderId/approve", approveOrder);
 router.patch("/orders/:orderId/reject", rejectOrder);
+
+module.exports = router;

@@ -1,13 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
-<%- include('../partials/head', { title: 'Manager Dashboard' }) %>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manager Dashboard</title>
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/sidebar.css">
+  <link rel="stylesheet" href="/css/dashboard.css">
+</head>
 <body>
 
-  <%- include('../partials/sidebar', { role: 'manager' }) %>
+  <%- include('../partials/sidebar', { role: 'manager', currentPath: '/manager/dashboard' }) %>
 
   <div class="main-content">
-    <%- include('../partials/topbar', { pageTitle: 'Dashboard' }) %>
-
     <div class="content-inner">
       <h2>Welcome, <%= user.name || 'Manager' %></h2>
       <p>Brewery Drink Distribution Management System  overview of current operations.</p>
@@ -25,6 +30,5 @@
     </div>
   </div>
 
-  <%- include('../partials/scripts') %>
 </body>
 </html>

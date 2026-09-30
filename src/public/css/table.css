@@ -1,0 +1,32 @@
+.table-wrap {
+  overflow-x: auto;
+  background: #ffffff;
+  border: 1px solid var(--border);
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.data-table thead {
+  background: var(--primary);
+}
+
+.data-table th {
+  color: #ffffff;
+  text-align: left;
+  padding: 14px 18px;
+  font-weight: normal;
+  font-size: 15px;
+}
+
+.data-table td {
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--border);
+  font-size: 15px;
+}
+
+.data-table tr:last-child td {
+  border-bottom: none;
+}

@@ -55,7 +55,7 @@ const logOut = async (req, res) => {
         .status(500)
         .render("error/500", { error: "Something went wrong.." });
     }
-    return res.redirect("auth/login");
+    return res.redirect("/auth/login");
   });
 };
 

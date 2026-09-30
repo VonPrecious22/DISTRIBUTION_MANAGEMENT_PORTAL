@@ -1,0 +1,91 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: white;
+    font-family: "Times New Roman", Times, serif;
+    font-size: 16px;
+    color: #333333;
+}
+
+/* Login box */
+.login-container {
+    width: 350px;
+    margin: 100px auto;
+    padding: 30px;
+    background-color: white;
+    border: 1px solid #d3d3d3;
+    border-radius: 5px;
+}
+
+/* Logo */
+.logo {
+    text-align: center;
+    margin-top: 15px;
+    margin-bottom: 25px;
+}
+
+.logo img {
+    width: 150px;
+    height: auto;
+}
+
+/* Heading */
+h2 {
+    text-align: center;
+    color: #d7193f;
+    font-size: 28px;
+    margin-bottom: 25px;
+}
+
+/* Form */
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 7px;
+    font-size: 17px;
+    font-weight: bold;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    border: 1px solid #cccccc;
+    border-radius: 3px;
+    font-family: "Times New Roman", Times, serif;
+    font-size: 16px;
+}
+
+input:focus {
+    outline: none;
+    border: 1px solid #d7193f;
+}
+
+/* Button */
+button {
+    width: 100%;
+    padding: 11px;
+    background-color: #d7193f;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    font-family: "Times New Roman", Times, serif;
+    font-size: 17px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #a91230;
+}
+
+/* Error message */
+.error {
+    padding: 10px;
+    text-align: center;
+    color: #a91230;
+    border: 1px solid #d7193f;
+    background-color: #fff1f3;
+}
