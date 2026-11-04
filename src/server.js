@@ -36,7 +36,9 @@ app.use(
   }),
 );
 
-
+app.get("/", (req, res) => {
+  res.redirect("/auth/login"); // Replace "/auth/login" with your actual login route if it differs
+});
 app.use("/auth", authRoute);
 app.use('/manager', managerRoute);
 app.use("/buyer", buyerRoute);
