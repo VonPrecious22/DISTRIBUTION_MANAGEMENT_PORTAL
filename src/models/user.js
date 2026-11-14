@@ -27,8 +27,9 @@ const userSchema = new mongoose.Schema(
     password: {
       type: String,
       required: true,
-      minlenghth: 6,
-      maxlenghth: 20
+      minlength: 6,
+      // Removed maxlength and fixed typos,
+      // because bcrypt hashes are ~60 characters long!
     },
     isActive: {
       type: Boolean,

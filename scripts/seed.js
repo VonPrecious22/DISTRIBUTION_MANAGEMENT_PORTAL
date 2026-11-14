@@ -22,6 +22,7 @@ const createManager = async () => {
       contact: "652675688",
       password: hashedPassword,
       role: "manager",
+      isActive: true,
     });
     console.log("manager created: ", manager.email);
     await mongoose.disconnect();
