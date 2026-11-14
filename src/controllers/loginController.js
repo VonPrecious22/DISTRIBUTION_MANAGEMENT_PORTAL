@@ -17,28 +17,33 @@ const login = async (req, res) => {
 
     const user = await User.findOne({ email });
     if (!user)
-      return res.status(401).render("error/404", {
-        error: "User not found.",
+      return res.status(200).render("auth/login", {
+        error: "Invalid email or password.",
       });
 
     const passwordMatch = await bcrypt.compare(password, user.password);
 
     if (!passwordMatch) {
       return res
-        .status(401)
+        .status(200)
         .render("auth/login", { error: "Invalid email or password." });
     }
+
     if (!user.isActive)
-      return res.status(403).render("auth/login", {
-        error: "Your account is inActive.",
+      return res.status(200).render("auth/login", {
+        error: "Your account is inactive.",
       });
+
     req.session.user = {
       id: user._id,
       role: user.role,
     };
-    if (user.role === "manager") return res.redirect("/manager/dashboard");
 
+    if (user.role === "manager") return res.redirect("/manager/dashboard");
     if (user.role === "buyer") return res.redirect("/buyer/dashboard");
+
+    // Fallback if role is unhandled
+    return res.redirect("/auth/login");
   } catch (err) {
     console.error(err);
     return res.status(500).render("error/500", {
